@@ -10,7 +10,7 @@ module.exports = {
     TYPE_KING: 'king',
     TYPE_QUEEN: 'queen',
 
-    dbUri: 'mongodb://localhost:27017/chess',
+    dbUri: process.env.dbUri || 'mongodb://localhost:27017/chess',
 
     corsAllowed: 'http://localhost:5173',
     DEFAULT_GAME: {
