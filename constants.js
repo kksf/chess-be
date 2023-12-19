@@ -10,7 +10,6 @@ module.exports = {
     TYPE_KING: 'king',
     TYPE_QUEEN: 'queen',
 
-    corsAllowed: 'http://localhost:5173',
     DEFAULT_GAME: {
         "players": [],
         "myColor": null,

@@ -24,7 +24,7 @@ const Constants = require('../constants')
 
 const io = new Server(server,  {
   cors: {
-    origin: Constants.corsAllowed,
+    origin: process.env.CORS_ALLOWED || 'http://localhost:5173',
     methods: ["GET", "POST"]
   }
 });
