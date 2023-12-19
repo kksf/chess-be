@@ -4,7 +4,7 @@ class ChessDatabase {
     collection
 
     constructor() {
-        this.client = new MongoClient('mongodb://localhost:27017');
+        this.client = new MongoClient(process.env.MONGODB_URI || 'mongodb://localhost:27017/chess');
     }
 
     async connect() {
