@@ -9,7 +9,7 @@ class ChessDatabase {
 
     async connect() {
         await this.client.connect();
-        this.database = this.client.db("chess");
+        this.database = this.client.db(process.env.MONGODB_DBNAME || 'chess');
         this.collection = this.database.collection("games");
     }
 
