@@ -10,7 +10,7 @@ module.exports = {
     TYPE_KING: 'king',
     TYPE_QUEEN: 'queen',
 
-    DEFAULT_GAME: {
+    _DEFAULT_GAME: {
         "players": [],
         "myColor": null,
         "enemyColor": null,
@@ -29,7 +29,7 @@ module.exports = {
         }
     },
 
-    __DEFAULT_GAME: {
+    DEFAULT_GAME: {
         "dateCreated": null,
         "dateUpdated": null,
         "players": [],
