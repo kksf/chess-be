@@ -17,6 +17,25 @@ class ChessDatabase {
         await this.client.close();
     }
 
+
+    async savePlayer(playerEntity){
+        if(playerEntity._id) {
+            const playerEntityOld = await this.collection.findOne({ _id: new ObjectId(playerEntity._id) });
+            if( ! playerEntityOld) {
+                throw new Error(`Player with id ${playerEntity._id} not found`)
+            }
+            await this.collection.updateOne({ _id: new ObjectId(playerEntity._id) }, { $set: {...playerEntityOld, ...playerEntity} })
+            return playerEntity._id
+        } else {
+            const result = await this.collection.insertOne(playerEntity)
+            return result.insertedId
+        }
+    }
+
+
+
+
+
     async createGame(data) {
         data.dateCreated = new Date();
         const result = await this.collection.insertOne(data);

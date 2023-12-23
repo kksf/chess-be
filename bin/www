@@ -28,7 +28,7 @@ const io = new Server(server,  {
     methods: ["GET", "POST"]
   }
 });
-const conn = require('../IOConnector')
+const conn = require('../Game')
 const connection = new conn(io)
 connection.process()
 
