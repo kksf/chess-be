@@ -1,5 +1,5 @@
 const Constants = require('./constants')
-const {generateRandomString} = require("./helpers");
+const {generateRandomString, cloneObject} = require("./helpers");
 const ChessDatabase = require("./db");
 const PlayerRepo = require("./repo/PlayerRepo");
 const GameRepo = require("./repo/GameRepo");
@@ -24,7 +24,6 @@ class Game {
     constructor(io) {
         this.io = io
     }
-
 
     process() {
         this.io.on('connection', async (socket) => {
@@ -73,11 +72,11 @@ class Game {
                     console.log('playerEntity', playerEntity)
                     console.log('opponentEntity', opponentEntity)
                     // emit game to the player
-                    const playerGame = this.prepareGameForPlayer(JSON.parse(JSON.stringify(gameEntity)), playerEntity)
+                    const playerGame = this.prepareGameForPlayer(cloneObject(gameEntity), playerEntity)
                     this.io.to(playerEntity.socketId).emit('game', playerGame)
 
                     // emit same game to the opponent
-                    const opponentGame = this.prepareGameForPlayer(JSON.parse(JSON.stringify(gameEntity)), opponentEntity)
+                    const opponentGame = this.prepareGameForPlayer(cloneObject(gameEntity), opponentEntity)
                     this.io.to(opponentEntity.socketId).emit('game', opponentGame)
 
                     console.log(`Game ${gameEntity._id} is created between ${JSON.stringify(playerEntity)} and ${JSON.stringify(opponentEntity)}`)
@@ -85,25 +84,20 @@ class Game {
             })
 
             socket.on('updateGame', async (userGame) => {
-                // save changes to DB
                 const gameRepo = new GameRepo()
                 await gameRepo.updateGame(userGame.gameId, {positions: userGame.positions, dateUpdated: new Date()})
                 const gameEntity = gameRepo.getEntity()
 
-                // update the player in DB
                 const playerRepo = new PlayerRepo()
                 await playerRepo.updatePlayer(userGame.playerId, {canMove: false})
 
-                // find opponent id
                 const opponentId = gameEntity.players.find(playerId => playerId.toString() !== userGame.playerId);
 
-                // update the opponent in DB
                 const opponentRepo = new PlayerRepo()
                 await opponentRepo.updatePlayer(opponentId, {canMove: true})
                 const opponentEntity = opponentRepo.getEntity()
 
-                // emit same game to the opponent
-                const opponentGame = this.prepareGameForPlayer(JSON.parse(JSON.stringify(gameEntity)), opponentEntity)
+                const opponentGame = this.prepareGameForPlayer(cloneObject(gameEntity), opponentEntity)
                 this.io.to(opponentEntity.socketId).emit('game', opponentGame)
 
                 console.log(`Game ${userGame._id} is updated`)
@@ -167,12 +161,6 @@ class Game {
         game.positions = gameForUser.positions
         this.games.set(gameForUser.gameId, game)
     }
-
-    emitGameToPlayer(player, game) {
-        const userGame = this.prepareGameForPlayer(game, player)
-        this.io.to(player.connectionId).emit('game', userGame)
-    }
-
 
     normalizeColors(playerColor, opponentColor) {
         if(playerColor === Constants.COLOR_ANY && opponentColor === Constants.COLOR_ANY) {
