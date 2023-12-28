@@ -156,12 +156,6 @@ class Game {
         return userGame
     }
 
-    updateGame(gameForUser) {
-        const game = this.games.get(gameForUser.gameId)
-        game.positions = gameForUser.positions
-        this.games.set(gameForUser.gameId, game)
-    }
-
     normalizeColors(playerColor, opponentColor) {
         if(playerColor === Constants.COLOR_ANY && opponentColor === Constants.COLOR_ANY) {
             playerColor = Constants.COLOR_WHITE
