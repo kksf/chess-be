@@ -1,11 +1,8 @@
 const Constants = require('./constants')
-const {generateRandomString, cloneObject} = require("./helpers");
-const ChessDatabase = require("./db");
+const {cloneObject} = require("./helpers");
 const PlayerRepo = require("./repo/PlayerRepo");
 const GameRepo = require("./repo/GameRepo");
 const UserGameDTO = require("./DTO/UserGameDTO");
-const {ObjectId} = require("mongodb");
-// const {aws4} = require("mongodb/src/deps");
 
 // TODO: too many players
 // TODO: sanitize
@@ -27,6 +24,12 @@ class Game {
 
     process() {
         this.io.on('connection', async (socket) => {
+            socket.on('ping', async data => {
+                const playerRepo = new PlayerRepo()
+                await playerRepo.updatePlayer(data.playerId, {socketId: socket.id})
+                console.log(`PING from playerId: ${data.playerId} on socket: ${socket.id}`)
+            })
+
             socket.on('newPlayer', async (data) => {
                 console.log(`New player: ${JSON.stringify(data)}`)
 
@@ -35,6 +38,8 @@ class Game {
                 await playerRepo.createPlayer(data, socket.id)
                 let playerEntity = playerRepo.getEntity()
                 console.log(`Player: ${JSON.stringify(playerEntity)}`)
+                this.io.to(playerEntity.socketId).emit('playerCreated', playerEntity)
+
 
                 // Find opponent by color
                 const opponentRepo = new PlayerRepo()

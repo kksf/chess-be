@@ -34,7 +34,11 @@ class Repo {
     }
 
     async patch(id, data) {
-        this.entity = await this.collection.findOneAndUpdate({ _id: new ObjectId(id) }, { $set: data }, { returnDocument: 'after' })
+        this.entity = await this.collection.findOneAndUpdate(
+            { _id: new ObjectId(id) },
+            { $set: data },
+            { returnDocument: 'after' }
+        )
     }
 
     async findById(_id) {
