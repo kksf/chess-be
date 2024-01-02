@@ -105,7 +105,7 @@ class Game {
                 const opponentGame = this.prepareGameForPlayer(cloneObject(gameEntity), opponentEntity)
                 this.io.to(opponentEntity.socketId).emit('game', opponentGame)
 
-                console.log(`Game ${userGame._id} is updated`)
+                console.log(`Game ${userGame.gameId} is updated`)
             })
 
 
