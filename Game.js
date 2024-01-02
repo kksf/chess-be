@@ -23,6 +23,10 @@ class Game {
     }
 
     process() {
+        this.io.onAny((event, ...args) => {
+            console.log(`onAny: ${event} ${JSON.stringify(args)}`)
+        })
+
         this.io.on('connection', async (socket) => {
             socket.on('ping', async data => {
                 const playerRepo = new PlayerRepo()
