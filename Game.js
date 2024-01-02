@@ -96,7 +96,7 @@ class Game {
                 const playerRepo = new PlayerRepo()
                 await playerRepo.updatePlayer(userGame.playerId, {canMove: false})
 
-                const opponentId = gameEntity.players.find(playerId => playerId.toString() !== userGame.playerId);
+                const opponentId = gameEntity.players.find(playerId => playerId.toString() !== userGame.playerId)
 
                 const opponentRepo = new PlayerRepo()
                 await opponentRepo.updatePlayer(opponentId, {canMove: true})
@@ -104,6 +104,7 @@ class Game {
 
                 const opponentGame = this.prepareGameForPlayer(cloneObject(gameEntity), opponentEntity)
                 this.io.to(opponentEntity.socketId).emit('game', opponentGame)
+                console.log(`Opponent is updated: ${JSON.stringify(opponentEntity)}`)
 
                 console.log(`Game ${userGame.gameId} is updated`)
             })
