@@ -2,8 +2,12 @@
 Do not use this project in real life. It is created with educational purposes only.
 
 ## Links
+### Repositories:
  - FE: https://github.com/kksf/chess-fe
  - BE: https://github.com/kksf/chess-be
+### Demo:
+- FE: https://chess-fe.adaptable.app/
+- BE: https://chess-be.adaptable.app/
 
 ## How to run
 Create mongo database;
@@ -22,5 +26,3 @@ In the proect root execute:
 - [x] Delete obsolete games
 - [x] Add game history
 - [x] Detect user goes offline and auto-cancel the game
-
-## Demo
