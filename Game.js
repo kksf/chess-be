@@ -1,8 +1,8 @@
 const Constants = require('./constants')
-const {cloneObject} = require("./helpers");
-const PlayerRepo = require("./repo/PlayerRepo");
-const GameRepo = require("./repo/GameRepo");
-const UserGameDTO = require("./DTO/UserGameDTO");
+const {cloneObject} = require("./helpers")
+const PlayerRepo = require("./repo/PlayerRepo")
+const GameRepo = require("./repo/GameRepo")
+const UserGameDTO = require("./DTO/UserGameDTO")
 
 // TODO: too many players
 // TODO: sanitize

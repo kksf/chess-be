@@ -63,7 +63,4 @@ module.exports = {
             '8': {type: 'rook', color: 'black', moved: false}
         }
     },
-
-
-
-};
+}

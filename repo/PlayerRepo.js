@@ -1,8 +1,6 @@
-const Repo = require('./Repo');
-const PlayerEntity = require('../DTO/PlayerEntity');
-const {ObjectId} = require("mongodb");
-const GameEntity = require("../DTO/GameEntity");
-const Constants = require("../constants");
+const Repo = require('./Repo')
+const PlayerEntity = require('../DTO/PlayerEntity')
+const {ObjectId} = require("mongodb")
 
 class PlayerRepo extends Repo {
     collectionName = 'players'
@@ -44,4 +42,4 @@ class PlayerRepo extends Repo {
     }
 }
 
-module.exports = PlayerRepo;
+module.exports = PlayerRepo

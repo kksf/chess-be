@@ -1,23 +1,22 @@
-const { MongoClient, ObjectId } = require("mongodb");
+const { MongoClient, ObjectId } = require("mongodb")
 
 class Repo {
     collectionName
-
     collection
     entity
 
     constructor() {
-        this.db = new MongoClient(process.env.MONGODB_URI || 'mongodb://localhost:27017/chess', {serverSelectionTimeoutMS: 5000});
+        this.db = new MongoClient(process.env.MONGODB_URI || 'mongodb://localhost:27017/chess', {serverSelectionTimeoutMS: 5000})
     }
 
     async connect() {
-        await this.db.connect();
-        this.database = this.db.db(process.env.MONGODB_DBNAME || 'chess');
-        this.collection = this.database.collection(this.collectionName);
+        await this.db.connect()
+        this.database = this.db.db(process.env.MONGODB_DBNAME || 'chess')
+        this.collection = this.database.collection(this.collectionName)
     }
 
     async close() {
-        await this.db.close();
+        await this.db.close()
     }
 
     async save() {
@@ -55,4 +54,4 @@ class Repo {
     }
 }
 
-module.exports = Repo;
+module.exports = Repo

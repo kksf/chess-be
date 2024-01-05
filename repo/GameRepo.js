@@ -1,6 +1,6 @@
-const Repo = require('./Repo');
-const GameEntity = require('../DTO/GameEntity');
-const Constants = require("../constants");
+const Repo = require('./Repo')
+const GameEntity = require('../DTO/GameEntity')
+const Constants = require("../constants")
 
 class GameRepo extends Repo {
     collectionName = 'games'
