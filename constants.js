@@ -10,22 +10,24 @@ module.exports = {
     TYPE_KING: 'king',
     TYPE_QUEEN: 'queen',
 
-    _DEFAULT_POSITIONS: {
+    DEFAULT_POSITIONS: {
         '1': {
-            '1': {type: 'pawn', color: 'white'},
+            '1': {type: 'rook', color: 'white', moved: false},
+            '5': {type: 'king', color: 'white', moved: false},
+            '8': {type: 'rook', color: 'white', moved: false},
         },
-        '2': {
-            '2': {type: 'pawn', color: 'black'},
+        '8': {
+            '5': {type: 'king', color: 'black'},
         }
     },
 
-    DEFAULT_POSITIONS: {
+    _DEFAULT_POSITIONS: {
         '1': {
             '1': {type: 'rook', color: 'white'},
             '2': {type: 'knight', color: 'white'},
             '3': {type: 'bishop', color: 'white'},
-            '4': {type: 'king', color: 'white'},
-            '5': {type: 'queen', color: 'white'},
+            '4': {type: 'queen', color: 'white'},
+            '5': {type: 'king', color: 'white'},
             '6': {type: 'bishop', color: 'white'},
             '7': {type: 'knight', color: 'white'},
             '8': {type: 'rook', color: 'white'}
@@ -54,8 +56,8 @@ module.exports = {
             '1': {type: 'rook', color: 'black'},
             '2': {type: 'knight', color: 'black'},
             '3': {type: 'bishop', color: 'black'},
-            '4': {type: 'king', color: 'black'},
-            '5': {type: 'queen', color: 'black'},
+            '4': {type: 'queen', color: 'black'},
+            '5': {type: 'king', color: 'black'},
             '6': {type: 'bishop', color: 'black'},
             '7': {type: 'knight', color: 'black'},
             '8': {type: 'rook', color: 'black'}

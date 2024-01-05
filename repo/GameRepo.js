@@ -12,12 +12,14 @@ class GameRepo extends Repo {
         this.entity.positions = JSON.parse(JSON.stringify(Constants.DEFAULT_POSITIONS))
         this.entity.dateCreated = new Date()
         await this.insert()
+        await this.close()
     }
 
     async updateGame(id, newData) {
         await this.connect()
         newData.dateUpdated = new Date()
         await this.patch(id, newData)
+        await this.close()
     }
 }
 

@@ -5,6 +5,10 @@ class UserGameDTO {
     gameId
     canMove
     positions
+    piecesTaken = {
+        white: [],
+        black: []
+    }
 }
 
 module.exports = UserGameDTO

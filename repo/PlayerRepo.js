@@ -16,12 +16,14 @@ class PlayerRepo extends Repo {
         this.entity.canMove = false
         this.entity.dateCreated = new Date()
         await this.insert()
+        await this.close()
     }
 
     async updatePlayer(id, newData) {
         await this.connect()
         newData.dateUpdated = new Date()
         await this.patch(id, newData)
+        await this.close()
     }
 
     async findWaitingByColorsAndIdNe(colors, id) {

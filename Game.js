@@ -90,7 +90,10 @@ class Game {
 
             socket.on('updateGame', async (userGame) => {
                 const gameRepo = new GameRepo()
-                await gameRepo.updateGame(userGame.gameId, {positions: userGame.positions, dateUpdated: new Date()})
+                await gameRepo.updateGame(userGame.gameId, {
+                    positions: userGame.positions,
+                    piecesTaken: userGame.piecesTaken
+                })
                 const gameEntity = gameRepo.getEntity()
 
                 const playerRepo = new PlayerRepo()
@@ -108,9 +111,6 @@ class Game {
 
                 console.log(`Game ${userGame.gameId} is updated`)
             })
-
-
-
 
 
 
@@ -158,6 +158,7 @@ class Game {
         userGame.gameId         = gameEntity._id
         userGame.canMove        = playerEntity.canMove
         userGame.positions      = gameEntity.positions
+        userGame.piecesTaken    = gameEntity.piecesTaken
 
         return userGame
     }

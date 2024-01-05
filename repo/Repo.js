@@ -7,7 +7,7 @@ class Repo {
     entity
 
     constructor() {
-        this.db = new MongoClient(process.env.MONGODB_URI || 'mongodb://localhost:27017/chess');
+        this.db = new MongoClient(process.env.MONGODB_URI || 'mongodb://localhost:27017/chess', {serverSelectionTimeoutMS: 5000});
     }
 
     async connect() {
